@@ -89,6 +89,28 @@ def add_maskformer2_config(cfg):
     cfg.MODEL.SWIN.OUT_FEATURES = ["res2", "res3", "res4", "res5"]
     cfg.MODEL.SWIN.USE_CHECKPOINT = False
 
+    # internimage backbone
+    cfg.MODEL.INTERNIMAGE = CN()
+    cfg.MODEL.INTERNIMAGE.CORE_OP = 'DCNv3'
+    cfg.MODEL.INTERNIMAGE.CHANNELS = 160
+    cfg.MODEL.INTERNIMAGE.DEPTHS = [5, 5, 22, 5]
+    cfg.MODEL.INTERNIMAGE.GROUPS = [10, 20, 40, 80]
+    cfg.MODEL.INTERNIMAGE.MLP_RATIO = 4.
+    cfg.MODEL.INTERNIMAGE.DROP_RATE = 0.
+    cfg.MODEL.INTERNIMAGE.DROP_PATH_RATE = 0.4
+    cfg.MODEL.INTERNIMAGE.norm_layer = 'LN'
+    cfg.MODEL.INTERNIMAGE.LAYER_SCALE = None
+    cfg.MODEL.INTERNIMAGE.OFFSET_SCALE = 2.0
+    cfg.MODEL.INTERNIMAGE.POST_NORM = False
+    cfg.MODEL.INTERNIMAGE.DW_KERNEL_SIZE = None
+    cfg.MODEL.INTERNIMAGE.RES_POST_NORM = False
+    cfg.MODEL.INTERNIMAGE.LEVEL2_POST_NORM = False
+    cfg.MODEL.INTERNIMAGE.LEVEL2_POST_NORM_BLOCK_IDS = None
+    cfg.MODEL.INTERNIMAGE.CENTER_FEATURE_SCALE = False
+    cfg.MODEL.INTERNIMAGE.WITH_CP = True
+    cfg.MODEL.INTERNIMAGE.OUT_INDICES = [0, 1, 2, 3]
+    cfg.MODEL.INTERNIMAGE.OUT_FEATURES = ["res2", "res3", "res4", "res5"]
+
     # NOTE: maskformer2 extra configs
     # transformer module
     cfg.MODEL.MASK_FORMER.TRANSFORMER_DECODER_NAME = "MultiScaleMaskedTransformerDecoder"
