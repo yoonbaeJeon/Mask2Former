@@ -1,0 +1,30 @@
+_BASE_: ../maskformer_R50_bs16_300k.yaml
+MODEL:
+  BACKBONE:
+    NAME: "D2internimage"
+  INTERNIMAGE:
+    CORE_OP: 'DCNv3'
+    CHANNELS: 160
+    DEPTHS: [5, 5, 22, 5]
+    GROUPS: [10, 20, 40, 80]
+    MLP_RATIO: 4.
+    DROP_RATE: 0.
+    DROP_PATH_RATE: 0.4
+    norm_layer: 'LN'
+    LAYER_SCALE: 1.
+    OFFSET_SCALE: 2.
+    POST_NORM: True
+    RES_POST_NORM: False
+    LEVEL2_POST_NORM: False
+    CENTER_FEATURE_SCALE: False
+    WITH_CP: True
+  WEIGHTS: "internimage_L_ImageNet_22k_192to384.pkl"
+  PIXEL_MEAN: [123.675, 116.280, 103.530]
+  PIXEL_STD: [58.395, 57.120, 57.375]
+  MASK_FORMER:
+    NUM_OBJECT_QUERIES: 200
+SOLVER:
+  IMS_PER_BATCH: 16
+  BASE_LR: 0.0001
+  MAX_ITER: 300000
+OUTPUT_DIR: "output/train/mapillary/internimageL"
